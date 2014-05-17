@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.watterssoft.appsupport.application.domain.ApplicationDTO;
-import org.watterssoft.common.utils.DateFormatter;
+import org.watterssoft.appsupport.common.utils.DateFormatter;
 
 import com.google.common.base.Preconditions;
 
