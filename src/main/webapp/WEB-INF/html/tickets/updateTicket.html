@@ -1,0 +1,126 @@
+
+<div>
+
+
+	<fieldset>
+		<legend>Ticket Description <a style="font-size: 14px;" ng-href="#editTicket/{{ticket.ticketId}}">Edit</a></legend>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class="form-group">
+					<label for="user_login">Desc</label> <input class="form-control"
+						id="user_login1" name="user[login]" required="false" size="30"
+						type="text" readonly="true" ng-model="ticket.ticketDescription" />
+				</div>
+			</div>
+		</div>
+
+	</fieldset>
+	<fieldset>
+		<legend>Options</legend>
+
+		<div class='row'>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Priority</label> <select
+						disabled="disabled" class="form-control" id="user_locale"
+						name="P1">
+						<option value="P1" selected="selected">P1</option>
+						<option value="P2">P2</option>
+						<option value="P3">P3</option>
+
+					</select>
+				</div>
+			</div>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Criticality</label> <select
+						disabled="disabled" class="form-control" id="user_locale"
+						name="C1">
+						<option value="C1" selected="selected">C1</option>
+						<option value="C2">C2</option>
+						<option value="C3">C3</option>
+
+					</select>
+				</div>
+			</div>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Application</label> <select
+						disabled="disabled" ng-model="ticket.applicationsHolder"
+						class="form-control" id="application_options" name="Release 1"
+						ng-options="application.name for application in applications">
+
+					</select>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Ticket Comments</legend>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='form-group' style="width: 100%;">
+					<label for="user_title">Comment</label>
+					<textarea style="height: 90px;" class="form-control"
+						id="user_title" name="user[title]" rows="8"></textarea>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</fieldset>
+	<div class='row'>
+
+		<div class='col-sm-12'>
+			<div class='form-group'>
+
+				<button class="btn btn-primary" ng-click="save()">Save</button>
+
+				<a class="btn btn-danger" href="#/tickets">Cancel</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-controller="TabsDemoCtrl">
+
+	<tabset> <tab heading="Static title">
+
+
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1">
+			<img height="80px" width="100%" alt=""
+				src="http://infinite-woodland-5276.herokuapp.com/assets/demo/avatars/2.jpg" />
+		</div>
+		<div class="col-md-11">
+			<div
+				style="border-color: aqua; min-height: 100px; border-style: solid; border-width: 1px;">test</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1">
+			<img height="80px" width="100%" alt=""
+				src="http://infinite-woodland-5276.herokuapp.com/assets/demo/avatars/2.jpg" />
+		</div>
+		<div class="col-md-11">
+			<div
+				style="border-color: aqua; min-height: 100px; border-style: solid; border-width: 1px;">test</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1">
+			<img height="80px" width="100%" alt=""
+				src="http://infinite-woodland-5276.herokuapp.com/assets/demo/avatars/2.jpg" />
+		</div>
+		<div class="col-md-11">
+			<div
+				style="border-color: aqua; min-height: 100px; border-style: solid; border-width: 1px;">test</div>
+		</div>
+	</div>
+	</tab> <tab ng-repeat="tab in tabs" heading="{{tab.title}}"
+		active="tab.active" disabled="tab.disabled"> {{tab.content}} </tab>  </tabset>
+</div>
+
+

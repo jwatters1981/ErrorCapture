@@ -1,0 +1,97 @@
+<div style="margin-bottom: 20px;">
+	<ul class="chartShortcuts">
+		<li><a href="#"> <span class="head">Total Open Tickets</span>
+				<span class="number">{{landingDTO.openTickets}}</span>
+		</a></li>
+		<li><a href="#"> <span class="head">Total InProgress</span> <span
+				class="number">309</span>
+		</a></li>
+		<li><a href="#"> <span class="head">Total Closed</span> <span
+				class="number">109</span>
+		</a></li>
+
+	</ul>
+</div>
+<div ng-app='App1' style="width: 100%; margin-bottom: 50px;">
+	<div ng-controller='FlotController' style="width: 100%;">
+		<chart ng-model='data' ng-options="options"> </chart>
+	</div>
+
+</div>
+
+<div ng-controller="TabsDemoCtrl">
+
+	<tabset> <tab heading="Recent Tickets (5)">
+
+
+
+
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1"></div>
+		<div class="col-md-11"></div>
+	</div>
+
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1">
+			<ul class="chartShortcuts">
+				<li><a href="#"> <span class="head">System Error</span> <span
+						class="smalltext">12/05/2014 15:13</span> <span class="smalltext">State:
+							Open</span>
+				</a></li>
+
+
+			</ul>
+		</div>
+		<div class="col-md-11">
+			<ul class="chartShortcuts">
+				<li style="width: 85%;"><a href="#"> <span class="head">View
+							Expired Exception</span> <span class="smalltext"> Message:
+							viewId:/ui/exceptionHandler.xhtml - A ViewExpiredException!
+							StackTrace: javax.faces.application.ViewExpiredException:
+							viewId:/ui/exceptionHandler.xhtml - A ViewExpiredException! at
+							org.primefaces.examples.view.ExceptionHandlerController.throwViewExpiredException(ExceptionHandlerController.java:38)
+							at sun.reflect.GeneratedMethodAccessor11421.invoke(Unknown
+							Source) at
+							sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+					</span>
+				</a></li>
+
+			</ul>
+		</div>
+	</div>
+
+	</tab> <tab heading="Open Tickets">
+	<div class="row" style="margin-top: 5px;">
+		<div class="col-md-1">
+			<ul class="chartShortcuts">
+				<li><a href="#"> <span class="head">System Error</span> <span
+						class="smalltext">12/05/2014 15:13</span> <span class="smalltext">State:
+							Open</span>
+				</a></li>
+
+
+			</ul>
+		</div>
+		<div class="col-md-11">
+			<ul class="chartShortcuts">
+				<li style="width: 85%;"><a href="#"> <span class="head">View
+							Expired Exception</span> <span class="smalltext">A unexpected
+							error occured! Message: A wrapped IllegalStateException!
+							java.lang.IllegalStateException: A wrapped IllegalStateException!
+							at
+							org.primefaces.examples.view.ExceptionHandlerController.throwWrappedIllegalStateException(ExceptionHandlerController.java:33)
+							at sun.reflect.GeneratedMethodAccessor11594.invoke(Unknown
+							Source) at
+							sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+					</span>
+				</a></li>
+
+			</ul>
+		</div>
+	</div>
+	</tab> <tab heading="In Progress Tickets"> </tab> <!--  tab ng-repeat="tab in tabs" heading="{{tab.title}}"
+		active="tab.active" disabled="tab.disabled"> {{tab.content}} </tab-->
+	</tabset>
+</div>
+
+

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" ng-app="AngularSpringApp">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+<title>Application Support</title>
+<link rel="stylesheet" href="resources/css/app.css" />
+<link rel="stylesheet"
+	href="../../resources/js/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="../../resources/js/lib/bootstrap/css/bootstrap-theme.css" />
+<script src="../../resources/jquery/js/jquery.js"></script>
+<script src="../../resources/jquery/js/jquery-ui.js"></script>
+<script src="../../resources/js/lib/bootstrap/js/bootstrap.js"></script>
+
+<!-- Just for debugging purposes. Don't actually copy this line! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+</style>
+</head>
+
+<body>
+
+	<!-- Fixed navbar -->
+	<div id="myDiv" style="width: 100%;"
+		class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container" style="width: 100%;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Application Monitor</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a ng-controller='RolesController'
+						ng-show="permissions.showAdmin" href="#/application/new">New
+							Application</a></li>
+					<li><a href="#/tickets/newTicket">New Ticket</a></li>
+					<li><a href="#/dashboard">Dashboards</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">John Watters <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">My Profile</a></li>
+							<li><a href="logout">Logout</a></li>
+							<li><a href="#">Settings</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+	<div class="container" style="width: 100%">
+		<div id="sidebar_big"  class="col-md-2"
+			style=" background-color: #F5F5F5; border-right-style:solid;border-right-color:gray;border-right-width:1px;
+    border-radius: 4px;
+    min-height: 900px;" >
+
+			<button style="float: right;"
+				onclick="document.getElementById('sidebar_big').style.display='none';document.getElementById('sidebar_small').style.display='block';
+				
+					document.getElementById('main_div').style.width='88.66%'">&lt;</button>
+
+			<div class='row' style="margin-top: 60px;">
+				<div class='col-sm-12'>
+					<div class="form-group">
+						<a href="#/applications">List Applications</a>
+
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-sm-12'>
+					<div class="form-group">
+						<a href="#/dashboard">Dashboard</a>
+
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-sm-12'>
+					<div class="form-group">
+						<a href="#/tickets/5/0/10">List all Tickets</a>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div id="sidebar_small" class="col-md-1"
+			style="background-color: gray; min-height: 600px; display: none; width:80px; background-color: #F5F5F5">
+			<button
+				onclick="document.getElementById('main_div').style.width='81.66%';document.getElementById('sidebar_small').style.display='none';document.getElementById('sidebar_big').style.display='block'">Close</button>
+		</div>
+		<div id="main_div" class="col-md-8" style="margin-left: 10px; width: 81.66%">
+			
+			<div ng-view></div>
+		</div>
+
+	</div>
+
+
+
+	<script>
+		$("[type=button]").button();
+		$("[type=button]").click(function() {
+			$(this).button('toggle');
+			if ($(this).text() === "Closed") {
+				$(this).button('open');
+			} else {
+				$(this).button('reset');
+			}
+		});
+	</script>
+	<script src="../../resources/js/lib/angular/angular.js"></script>
+	<script src="../../resources/js/lib/angular/angular-route.js"></script>
+
+	<script src="../../resources/js/app.js"></script>
+	<script src="../../resources/js/services.js"></script>
+
+	<script src="../../resources/js/controllers/CarController.js"></script>
+	<script src="../../resources/js/controllers/DashboardController.js"></script>
+	<script
+		src="../../resources/js/lib/ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+	<script src="../../resources/js/controllers/TicketController.js"></script>
+	<script src="../../resources/js/controllers/ApplicationController.js"></script>
+	<script
+		src="../../resources/js/controllers/CreateApplicationController.js"></script>
+
+	<script src="../../resources/js/controllers/FlotController.js"></script>
+	<script src="../../resources/js/controllers/CreateTicketController.js"></script>
+	<script src="../../resources/jquery/js/jquery.js"></script>
+
+	<script src="../../resources/flot/jquery.flot.js"></script>
+	<script src="../../resources/flot/jquery.flot.pie.js"></script>
+
+
+	<script src="../../resources/js/filters.js"></script>
+	<script src="../../resources/js/directives.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+<div style="width: 50%;">
+
+	<fieldset>
+		<legend>Application</legend>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='form-group'>
+					<label for="user_login">Name</label> <input class="form-control"
+						id="user_login" name="user[login]" required="false" size="30"
+						type="text" ng-model="application.name" />
+
+				</div>
+			</div>
+
+
+			<div class='col-sm-12'>
+				<div class="form-group">
+					<label for="user_login">Version</label> <input class="form-control"
+						id="user_login1" name="user[login]" required="false" size="30"
+						type="text" ng-model="application.version" />
+				</div>
+			</div>
+
+
+			<div class='col-sm-12'>
+				<div class="form-group">
+					<label for="user_login">Application URL</label> <input
+						class="form-control" id="user_login1" name="user[login]"
+						required="false" size="30" type="text" ng-model="application.url" />
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset>
+
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='form-group'>
+
+					<button class="btn btn-primary" ng-click="addNewApplication()">Save</button>
+					<a class="btn btn-danger" href="#/tickets">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+</div>

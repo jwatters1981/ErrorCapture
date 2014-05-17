@@ -1,0 +1,46 @@
+<div style="margin-bottom: 20px;">
+				<ul class="chartShortcuts">
+					<li><a href="#"> <span class="head">Total Open
+								Tickets</span> <span class="number">509</span>
+					</a></li>
+					<li><a href="#"> <span class="head">Total
+								InProgress</span> <span class="number">309</span>
+					</a></li>
+					<li><a href="#"> <span class="head">Total Closed</span> <span
+							class="number">109</span>
+					</a></li>
+
+				</ul>
+			</div>
+<div class="alert alert-info" style="width: 400px;"
+	ng-show="applications.length == 0">No applications found</div>
+<table class="table table-bordered table-striped"
+	style="width: 100%;"
+	ng-show="applications.length > 0">
+	<thead>
+		<tr>
+			<th style="text-align: center; width: 25px;">Action</th>
+			<th style="text-align: center;">Application Name</th>
+			<th style="text-align: center;">Application Version</th>
+			<th style="text-align: center;">Open Tickets</th>
+			<th style="text-align: center;">In Progress Tickets</th>
+			<th style="text-align: center;">Closed Tickets</th>
+			<th style="text-align: center;">Last Ticket Created</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="application in applications">
+			<td style="width: 70px; text-align: center;"><a
+				href="#/tickets/{{application.id}}/0/20">View</a></td>
+			<td>{{application.name}}</td>
+			<td>{{application.version}}</td>
+			<td>{{application.numberOfOpenTickets}}</td>
+			<td>{{application.numberOfClosedTickets}}</td>
+			<td>1002</td>
+			<td>09/10/2014 15:34</td>
+		</tr>
+	</tbody>
+</table>
+
+	
+</div>

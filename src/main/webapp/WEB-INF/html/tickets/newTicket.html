@@ -1,0 +1,82 @@
+
+<div>
+
+
+	<fieldset>
+		<legend>Ticket Description</legend>
+		<div class='row'>
+
+			<div class='col-sm-12'>
+				<div class="form-group">
+					<label for="user_login">Desc</label> <input class="form-control"
+						id="user_login1" name="user[login]" required="false" size="30"
+						type="text" ng-model="ticket.ticketDescription" />
+				</div>
+			</div>
+		</div>
+
+	</fieldset>
+	<fieldset>
+		<legend>Options</legend>
+
+		<div class='row'>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Priority</label> <select
+						class="form-control" id="user_locale" name="P1">
+						<option value="P1" selected="selected">P1</option>
+						<option value="P2">P2</option>
+						<option value="P3">P3</option>
+
+					</select>
+				</div>
+			</div>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Criticality</label> <select
+						class="form-control" id="user_locale" name="C1">
+						<option value="C1" selected="selected">C1</option>
+						<option value="C2">C2</option>
+						<option value="C3">C3</option>
+
+					</select>
+				</div>
+			</div>
+			<div class='col-sm-4'>
+				<div class='form-group'>
+					<label for="user_locale">Application</label> <select
+						data-ng-model="ticket.applicationsHolder" class="form-control"
+						id="application_options" name="Release 1"
+						ng-options="application.name for application in applications">
+						<option value="">Choose Application</option>
+
+					</select>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Ticket Comments</legend>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='form-group' style="width: 100%;">
+					<label for="user_title">Comment</label>
+					<textarea class="form-control" id="user_title" name="user[title]"
+						rows="10"></textarea>
+				</div>
+			</div>
+
+		</div>
+		<div class='row'>
+
+			<div class='col-sm-12'>
+				<div class='form-group'>
+
+					<button class="btn btn-default" ng-click="save()">Save</button>
+				
+					<a class="btn btn-default" href="#/tickets">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+</div>
