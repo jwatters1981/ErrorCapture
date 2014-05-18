@@ -53,6 +53,6 @@ App.config([ '$routeProvider', function($routeProvider) {
 	});
 
 	$routeProvider.otherwise({
-		redirectTo : '/application'
+		redirectTo : '/landing'
 	});
 } ]);

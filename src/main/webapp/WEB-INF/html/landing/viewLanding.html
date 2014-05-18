@@ -21,17 +21,18 @@
 
 <div ng-controller="TabsDemoCtrl">
 
-	<tabset> <tab heading="Recent Tickets (5)">
+	<tabset> <tab heading="Recent Tickets ({{landingDTO.openTicketsList.length}})">
 
 
 
 
-	<div class="row" style="margin-top: 5px;">
+	<div class="row" style="margin-top: 5px;" >
+	
 		<div class="col-md-1"></div>
 		<div class="col-md-11"></div>
 	</div>
 
-	<div class="row" style="margin-top: 5px;">
+	<div class="row" style="margin-top: 5px;" ng-repeat="item in landingDTO.openTicketsList">
 		<div class="col-md-1">
 			<ul class="chartShortcuts">
 				<li><a href="#"> <span class="head">System Error</span> <span
@@ -44,15 +45,8 @@
 		</div>
 		<div class="col-md-11">
 			<ul class="chartShortcuts">
-				<li style="width: 85%;"><a href="#"> <span class="head">View
-							Expired Exception</span> <span class="smalltext"> Message:
-							viewId:/ui/exceptionHandler.xhtml - A ViewExpiredException!
-							StackTrace: javax.faces.application.ViewExpiredException:
-							viewId:/ui/exceptionHandler.xhtml - A ViewExpiredException! at
-							org.primefaces.examples.view.ExceptionHandlerController.throwViewExpiredException(ExceptionHandlerController.java:38)
-							at sun.reflect.GeneratedMethodAccessor11421.invoke(Unknown
-							Source) at
-							sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+				<li style="width: 85%;"><a href="#"> <span class="head">{{item.ticketDescription}}</span> 
+				<span class="smalltext"> {{item.ticketComment}}
 					</span>
 				</a></li>
 

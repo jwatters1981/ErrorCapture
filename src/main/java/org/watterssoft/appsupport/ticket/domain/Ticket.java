@@ -17,7 +17,11 @@
 package org.watterssoft.appsupport.ticket.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +36,8 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -76,6 +82,10 @@ public class Ticket implements Serializable
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "APPLICATION_ID")
 	private Application application;
+
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = TicketComment.class,mappedBy="ticket")
+	@OrderBy("createdDate desc")
+	private List<TicketComment> ticketComments = new ArrayList<TicketComment>();
 
 	public Ticket(String description, Date createdDate, Priority priority, Application application)
 	{
@@ -184,6 +194,16 @@ public class Ticket implements Serializable
 		else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public List<TicketComment> getTicketComments()
+	{
+		return ticketComments;
+	}
+
+	public void setTicketComments(List<TicketComment> ticketComments)
+	{
+		this.ticketComments = ticketComments;
 	}
 
 	public TicketState getState()

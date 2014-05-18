@@ -27,9 +27,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.watterssoft.appsupport.application.dao.ApplicationDao;
 import org.watterssoft.appsupport.application.domain.Application;
+import org.watterssoft.appsupport.ticket.dao.TicketCommentDao;
 import org.watterssoft.appsupport.ticket.dao.TicketDao;
 import org.watterssoft.appsupport.ticket.domain.Priority;
 import org.watterssoft.appsupport.ticket.domain.Ticket;
+import org.watterssoft.appsupport.ticket.domain.TicketComment;
 import org.watterssoft.appsupport.ticket.domain.TicketDTO;
 import org.watterssoft.appsupport.ticket.domain.TicketState;
 
@@ -44,6 +46,9 @@ public class TicketService
 
 	@Autowired
 	private TicketDao ticketDao;
+	
+	@Autowired
+	private TicketCommentDao ticketCommentDao;
 
 	@Autowired
 	private ApplicationDao applicationDao;
@@ -103,10 +108,12 @@ public class TicketService
 	}
 
 	@Transactional
-	public void addConvertAndSaveTicketDTO(TicketDTO ticketDTO)
+	public void convertAndSaveTicketDTO(TicketDTO ticketDTO, String username)
 	{
 		Application application = applicationDao.findApplicationById(ticketDTO.getApplicationsHolder().getId());
 		Ticket ticket = new Ticket(ticketDTO.getTicketDescription(), new Date(), Priority.P1, application);
+		TicketComment ticketComment = new TicketComment(ticket,ticketDTO.getTicketComment(),username,new Date());
+		ticketCommentDao.save(ticketComment);
 		ticketDao.save(ticket);
 	}
 

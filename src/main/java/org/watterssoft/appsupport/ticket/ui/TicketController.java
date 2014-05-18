@@ -22,12 +22,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.watterssoft.appsupport.application.domain.ApplicationDTO;
 import org.watterssoft.appsupport.application.service.ApplicationService;
 import org.watterssoft.appsupport.ticket.domain.Ticket;
@@ -51,6 +55,13 @@ public class TicketController
 	@Autowired
 	private ApplicationService applicationService;
 
+	@ExceptionHandler
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public void handle(HttpMessageNotReadableException e)
+	{
+		throw new RuntimeException("400 error in TicketController",e);
+	}
+
 	@RequestMapping("/ticketlist.json/{applicationId}/{start}/{end}")
 	public @ResponseBody List<TicketDTO> getTicketList(@PathVariable String applicationId, @PathVariable Integer start, @PathVariable Integer end)
 	{
@@ -61,9 +72,9 @@ public class TicketController
 	}
 
 	@RequestMapping(value = "/addTicket", method = RequestMethod.POST)
-	public String addTicket(@RequestBody TicketDTO ticketDTO)
+	public String addTicket(@RequestBody TicketDTO ticketDTO, HttpServletRequest request)
 	{
-		ticketService.addConvertAndSaveTicketDTO(ticketDTO);
+		ticketService.convertAndSaveTicketDTO(ticketDTO, request.getRemoteUser());
 		return getTicketPartialPage();
 	}
 

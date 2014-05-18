@@ -35,25 +35,35 @@ public class TicketDTO implements Serializable
 	private static final long serialVersionUID = 1L;
 	private String applicationName;
 	private String ticketDescription;
+	
+	private List<TicketComment> ticketComments = new ArrayList<TicketComment>();
 	private String createdDate;
-	private Long id;
+	private Long ticketId;
 	private String state;
 
 	private ApplicationDTO applicationsHolder;
 	private List<ApplicationDTO> applications = new ArrayList<ApplicationDTO>();
+	private String ticketComment;
+
+	
 
 	public TicketDTO(Ticket ticket)
 	{
-		Preconditions.checkNotNull(ticket,"Ticket was null");
-		Preconditions.checkNotNull(ticket.getApplication(),"Ticket should have an application");
-		Preconditions.checkNotNull(ticket.getState(),"State should not be null");
+		Preconditions.checkNotNull(ticket, "Ticket was null");
+		Preconditions.checkNotNull(ticket.getApplication(), "Ticket should have an application");
+		Preconditions.checkNotNull(ticket.getState(), "State should not be null");
 
 		this.applicationName = ticket.getApplication().getName();
 		this.ticketDescription = ticket.getDescription();
 		this.applicationsHolder = new ApplicationDTO(ticket.getApplication());
 		this.createdDate = DateFormatter.formatDateToString(ticket.getCreatedDate());
-		this.id = ticket.getId();
+		this.ticketId = ticket.getId();
 		this.state = ticket.getState().getState();
+		this.ticketComments = ticket.getTicketComments();
+		if(!this.ticketComments.isEmpty())
+		{
+			this.ticketComment = ticketComments.get(0).getComment();
+		}
 	}
 
 	public TicketDTO(Ticket ticket, List<ApplicationDTO> applications)
@@ -69,8 +79,9 @@ public class TicketDTO implements Serializable
 
 	public TicketDTO()
 	{
-		
+
 	}
+
 	public String getApplicationName()
 	{
 		return applicationName;
@@ -90,10 +101,10 @@ public class TicketDTO implements Serializable
 	{
 		return applications;
 	}
-	
+
 	public Long getTicketId()
 	{
-		return id;
+		return ticketId;
 	}
 
 	public void setApplicationName(String applicationName)
@@ -125,10 +136,41 @@ public class TicketDTO implements Serializable
 	{
 		this.applicationsHolder = applicationsHolder;
 	}
-	
+
 	public String getState()
 	{
 		return this.state;
+	}
+
+	public String getTicketComment()
+	{
+		return ticketComment;
+	}
+
+	public void setTicketComment(String ticketComment)
+	{
+		this.ticketComment = ticketComment;
+	}
+
+	
+	public List<TicketComment> getTicketComments()
+	{
+		return ticketComments;
+	}
+
+	public void setTicketComments(List<TicketComment> ticketComments)
+	{
+		this.ticketComments = ticketComments;
+	}
+	
+	public void setState(String state)
+	{
+		this.state = state;
+	}
+
+	public void setTicketId(Long ticketId)
+	{
+		this.ticketId = ticketId;
 	}
 
 }
