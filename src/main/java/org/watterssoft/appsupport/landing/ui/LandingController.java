@@ -16,8 +16,11 @@
 
 package org.watterssoft.appsupport.landing.ui;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +42,8 @@ public class LandingController
 	@RequestMapping("/landingData")
 	public @ResponseBody LandingDTO loadLandingDTO(HttpServletRequest request)
 	{
-		return landingService.getLandingPageForUser(request.getRemoteUser());
+		DateTime dateTime = new DateTime();
+		return landingService.getLandingPageForUser(request.getRemoteUser(), dateTime.minusDays(10).toDate());
 	}
 	@RequestMapping("/viewLanding")
 	public String getViewLandingPartial()

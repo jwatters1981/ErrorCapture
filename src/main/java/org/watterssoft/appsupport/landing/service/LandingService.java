@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.watterssoft.appsupport.application.domain.Application;
 import org.watterssoft.appsupport.application.service.ApplicationService;
 import org.watterssoft.appsupport.landing.domain.LandingDTO;
 import org.watterssoft.appsupport.ticket.domain.TicketDTO;
@@ -41,55 +42,61 @@ import com.google.common.collect.Collections2;
 public class LandingService
 {
 
-	@Autowired
 	private TicketService ticketService;
 
-	@Autowired
 	private ApplicationService applicationService;
 
-	public LandingDTO getLandingPageForUser(String username)
+	@Autowired
+	public LandingService(TicketService ticketService, ApplicationService applicationService)
+	{
+		super();
+		this.ticketService = ticketService;
+		this.applicationService = applicationService;
+	}
+
+	public LandingDTO getLandingPageForUser(String username, Date fromDate)
 	{
 		List<UserApplication> userApplications = applicationService.getAllUserApplications(username);
 		long openTicketsForApplications = 0, inprogressTicketsForApplication = 0, closedTicketsForApplications = 0;
 		for (UserApplication userApplication : userApplications)
 		{
-			openTicketsForApplications += ticketService.getNumberOfTicketsforApplicationByState(userApplication.getApplication().getId(), TicketState.NEW);
-			inprogressTicketsForApplication += ticketService.getNumberOfTicketsforApplicationByState(userApplication.getApplication().getId(), TicketState.INPROGRESS);
-			closedTicketsForApplications += ticketService.getNumberOfTicketsforApplicationByState(userApplication.getApplication().getId(), TicketState.CLOSED);
+			Long id = getAplicationId(userApplication);
+			openTicketsForApplications += ticketService.getNumberOfTicketsforApplicationByState(id, TicketState.NEW);
+			inprogressTicketsForApplication += ticketService.getNumberOfTicketsforApplicationByState(id, TicketState.INPROGRESS);
+			closedTicketsForApplications += ticketService.getNumberOfTicketsforApplicationByState(id, TicketState.CLOSED);
 		}
-		Date tenDaysPrevious = createDateMinusDays(-10);
-		List<TicketDTO> allRecentTickets = ticketService.getTicketsCreatedAfterDate(tenDaysPrevious);
+		List<TicketDTO> allRecentTickets = ticketService.getTicketsCreatedAfterDate(fromDate);
 		Collection<TicketDTO> openTicketList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_OPEN);
-		Collection<TicketDTO> inProgressList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_INPROGRESS);
+		Collection<TicketDTO> inProgressList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_CLOSED);
 		return new LandingDTO(openTicketsForApplications, inprogressTicketsForApplication, closedTicketsForApplications, allRecentTickets, new ArrayList<TicketDTO>(openTicketList),
 				new ArrayList<TicketDTO>(inProgressList));
 
 	}
 
 	/**
+	 * @param userApplication
 	 * @return
 	 */
-	private Date createDateMinusDays(int days)
+	private Long getAplicationId(UserApplication userApplication)
 	{
-		Calendar instance = Calendar.getInstance();
-		instance.set(Calendar.DAY_OF_YEAR, days);
-		Date tenDaysPrevious = instance.getTime();
-		return tenDaysPrevious;
+		Application application = userApplication.getApplication();
+		Long id = application.getId();
+		return id;
 	}
 
 	private static Predicate<TicketDTO> TICKET_STATE_PREDICATE_OPEN = new Predicate<TicketDTO>()
 	{
 		public boolean apply(TicketDTO ticket)
 		{
-			return ticket.getState().equalsIgnoreCase(TicketState.OPEN.getState());
+			return ticket.getState().equalsIgnoreCase(TicketState.NEW.getState());
 		}
 	};
 
-	private static Predicate<TicketDTO> TICKET_STATE_PREDICATE_INPROGRESS = new Predicate<TicketDTO>()
+	private static Predicate<TicketDTO> TICKET_STATE_PREDICATE_CLOSED = new Predicate<TicketDTO>()
 	{
 		public boolean apply(TicketDTO ticket)
 		{
-			return ticket.getState().equalsIgnoreCase(TicketState.INPROGRESS.getState());
+			return ticket.getState().equalsIgnoreCase(TicketState.CLOSED.getState());
 		}
 	};
 }

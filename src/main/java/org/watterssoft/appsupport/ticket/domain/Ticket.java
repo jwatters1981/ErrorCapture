@@ -43,9 +43,8 @@ import org.watterssoft.appsupport.application.domain.Application;
 @Entity
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "Ticket.countNumberOfTicketsForApplicationByState", query = "select count(ID) from ticket s where s.application_id = :application_id and ticket_state = :state"),
-		@NamedNativeQuery(name = "Ticket.countNumberOfTicketsForApplication", query = "select count(ID) from ticket s where s.application_id = :application_id")})
-@NamedQueries({
-	@NamedQuery(name = "Ticket.findNumberOfTicketsCreatedAfterDate", query = "select s from Ticket s where s.createdDate >= :date")})
+		@NamedNativeQuery(name = "Ticket.countNumberOfTicketsForApplication", query = "select count(ID) from ticket s where s.application_id = :application_id") })
+@NamedQueries({ @NamedQuery(name = "Ticket.findNumberOfTicketsCreatedAfterDate", query = "select s from Ticket s where s.createdDate >= :date") })
 public class Ticket implements Serializable
 {
 
@@ -80,12 +79,17 @@ public class Ticket implements Serializable
 
 	public Ticket(String description, Date createdDate, Priority priority, Application application)
 	{
+		this(description, createdDate, priority, TicketState.NEW, application);
+	}
+
+	public Ticket(String description, Date createdDate, Priority priority, TicketState state, Application application)
+	{
 		super();
 		this.description = description;
 		this.createdDate = createdDate;
 		this.priority = priority;
+		this.state = state;
 		this.application = application;
-		this.state = TicketState.NEW;
 	}
 
 	public Ticket()
