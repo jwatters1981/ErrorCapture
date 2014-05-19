@@ -50,7 +50,7 @@ import org.watterssoft.appsupport.application.domain.Application;
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "Ticket.countNumberOfTicketsForApplicationByState", query = "select count(ID) from ticket s where s.application_id = :application_id and ticket_state = :state"),
 		@NamedNativeQuery(name = "Ticket.countNumberOfTicketsForApplication", query = "select count(ID) from ticket s where s.application_id = :application_id") })
-@NamedQueries({ @NamedQuery(name = "Ticket.findNumberOfTicketsCreatedAfterDate", query = "select s from Ticket s where s.createdDate >= :date") })
+@NamedQueries({ @NamedQuery(name = "Ticket.findNumberOfTicketsCreatedAfterDate", query = "select s from Ticket s where s.createdDate >= :date order by s.createdDate desc") })
 public class Ticket implements Serializable
 {
 

@@ -16,8 +16,6 @@
 
 package org.watterssoft.appsupport.landing.ui;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
