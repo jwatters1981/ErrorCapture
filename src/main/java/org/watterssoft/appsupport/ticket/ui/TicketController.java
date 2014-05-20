@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.watterssoft.appsupport.application.domain.ApplicationDTO;
 import org.watterssoft.appsupport.application.service.ApplicationService;
+import org.watterssoft.appsupport.ticket.domain.ListTicketDTO;
 import org.watterssoft.appsupport.ticket.domain.Ticket;
 import org.watterssoft.appsupport.ticket.domain.TicketDTO;
 import org.watterssoft.appsupport.ticket.service.TicketService;
@@ -63,7 +64,7 @@ public class TicketController
 	}
 
 	@RequestMapping("/ticketlist.json/{applicationId}/{start}/{end}")
-	public @ResponseBody List<TicketDTO> getTicketList(@PathVariable String applicationId, @PathVariable Integer start, @PathVariable Integer end)
+	public @ResponseBody List<ListTicketDTO> getTicketList(@PathVariable String applicationId, @PathVariable Integer start, @PathVariable Integer end)
 	{
 		Preconditions.checkNotNull(applicationId);
 		start = Objects.firstNonNull(start, new Integer(0));

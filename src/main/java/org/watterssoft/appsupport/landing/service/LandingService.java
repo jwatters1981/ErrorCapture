@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 import org.watterssoft.appsupport.application.domain.Application;
 import org.watterssoft.appsupport.application.service.ApplicationService;
 import org.watterssoft.appsupport.landing.domain.LandingDTO;
-import org.watterssoft.appsupport.ticket.domain.TicketDTO;
+import org.watterssoft.appsupport.ticket.domain.ListTicketDTO;
 import org.watterssoft.appsupport.ticket.domain.TicketState;
 import org.watterssoft.appsupport.ticket.service.TicketService;
 import org.watterssoft.appsupport.user.domain.UserApplication;
@@ -64,11 +64,11 @@ public class LandingService
 			inprogressTicketsForApplication += ticketService.getNumberOfTicketsforApplicationByState(id, TicketState.INPROGRESS);
 			closedTicketsForApplications += ticketService.getNumberOfTicketsforApplicationByState(id, TicketState.CLOSED);
 		}
-		List<TicketDTO> allRecentTickets = ticketService.getTicketsCreatedAfterDate(fromDate);
-		Collection<TicketDTO> openTicketList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_OPEN);
-		Collection<TicketDTO> inProgressList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_CLOSED);
-		return new LandingDTO(openTicketsForApplications, inprogressTicketsForApplication, closedTicketsForApplications, allRecentTickets, new ArrayList<TicketDTO>(openTicketList),
-				new ArrayList<TicketDTO>(inProgressList));
+		List<ListTicketDTO> allRecentTickets = ticketService.getTicketsCreatedAfterDate(fromDate);
+		Collection<ListTicketDTO> openTicketList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_OPEN);
+		Collection<ListTicketDTO> inProgressList = Collections2.filter(allRecentTickets, TICKET_STATE_PREDICATE_CLOSED);
+		return new LandingDTO(openTicketsForApplications, inprogressTicketsForApplication, closedTicketsForApplications, allRecentTickets, new ArrayList<ListTicketDTO>(openTicketList),
+				new ArrayList<ListTicketDTO>(inProgressList));
 
 	}
 
@@ -83,17 +83,17 @@ public class LandingService
 		return id;
 	}
 
-	private static Predicate<TicketDTO> TICKET_STATE_PREDICATE_OPEN = new Predicate<TicketDTO>()
+	private static Predicate<ListTicketDTO> TICKET_STATE_PREDICATE_OPEN = new Predicate<ListTicketDTO>()
 	{
-		public boolean apply(TicketDTO ticket)
+		public boolean apply(ListTicketDTO ticket)
 		{
 			return ticket.getState().equalsIgnoreCase(TicketState.NEW.getState());
 		}
 	};
 
-	private static Predicate<TicketDTO> TICKET_STATE_PREDICATE_CLOSED = new Predicate<TicketDTO>()
+	private static Predicate<ListTicketDTO> TICKET_STATE_PREDICATE_CLOSED = new Predicate<ListTicketDTO>()
 	{
-		public boolean apply(TicketDTO ticket)
+		public boolean apply(ListTicketDTO ticket)
 		{
 			return ticket.getState().equalsIgnoreCase(TicketState.CLOSED.getState());
 		}

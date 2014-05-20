@@ -18,7 +18,7 @@ package org.watterssoft.appsupport.landing.domain;
 
 import java.util.List;
 
-import org.watterssoft.appsupport.ticket.domain.TicketDTO;
+import org.watterssoft.appsupport.ticket.domain.ListTicketDTO;
 
 /**
  * @author johnwatters 16 May 2014 22:24:37
@@ -28,8 +28,8 @@ public class LandingDTO
 {
 
 	long openTickets, inprogressTickets, closedTickets;
-	private List<TicketDTO> recentTickets, openTicketsList, closedTicketsList;
-	public LandingDTO(long openTickets, long inprogressTickets, long closedTickets, List<TicketDTO> recentTickets, List<TicketDTO> openTicketsList, List<TicketDTO> closedTicketsList)
+	private List<ListTicketDTO> recentTickets, openTicketsList, closedTicketsList;
+	public LandingDTO(long openTickets, long inprogressTickets, long closedTickets, List<ListTicketDTO> recentTickets, List<ListTicketDTO> openTicketsList, List<ListTicketDTO> closedTicketsList)
 	{
 		super();
 		this.openTickets = openTickets;
@@ -56,15 +56,15 @@ public class LandingDTO
 	{
 		return closedTickets;
 	}
-	public List<TicketDTO> getRecentTickets()
+	public List<ListTicketDTO> getRecentTickets()
 	{
 		return recentTickets;
 	}
-	public List<TicketDTO> getOpenTicketsList()
+	public List<ListTicketDTO> getOpenTicketsList()
 	{
 		return openTicketsList;
 	}
-	public List<TicketDTO> getClosedTicketsList()
+	public List<ListTicketDTO> getClosedTicketsList()
 	{
 		return closedTicketsList;
 	}

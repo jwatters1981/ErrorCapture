@@ -29,6 +29,7 @@ import org.watterssoft.appsupport.application.dao.ApplicationDao;
 import org.watterssoft.appsupport.application.domain.Application;
 import org.watterssoft.appsupport.ticket.dao.TicketCommentDao;
 import org.watterssoft.appsupport.ticket.dao.TicketDao;
+import org.watterssoft.appsupport.ticket.domain.ListTicketDTO;
 import org.watterssoft.appsupport.ticket.domain.Priority;
 import org.watterssoft.appsupport.ticket.domain.Ticket;
 import org.watterssoft.appsupport.ticket.domain.TicketComment;
@@ -60,10 +61,10 @@ public class TicketService
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<TicketDTO> getAllTicketsForApplicationReadOnly(Long application, PageRequest pageable)
+	public List<ListTicketDTO> getAllTicketsForApplicationReadOnly(Long application, PageRequest pageable)
 	{
 		List<Ticket> list = getAllTicketsForApplication(application, pageable);
-		List<TicketDTO> ticketDTOs = convertTicketListToTicketDTOList(list);
+		List<ListTicketDTO> ticketDTOs = convertTicketListToTicketDTOList(list);
 		return ticketDTOs;
 	}
 
@@ -71,22 +72,22 @@ public class TicketService
 	 * @param list
 	 * @return
 	 */
-	private List<TicketDTO> convertTicketListToTicketDTOList(List<Ticket> list)
+	private List<ListTicketDTO> convertTicketListToTicketDTOList(List<Ticket> list)
 	{
-		List<TicketDTO> ticketDTOs = new ArrayList<TicketDTO>();
+		List<ListTicketDTO> ticketDTOs = new ArrayList<ListTicketDTO>();
 		for (Ticket ticket : list)
 		{
-			ticketDTOs.add(new TicketDTO(ticket));
+			ticketDTOs.add(new ListTicketDTO(ticket));
 		}
 		return ticketDTOs;
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
- 	public List<TicketDTO> getTicketsCreatedAfterDate(Date date)
+ 	public List<ListTicketDTO> getTicketsCreatedAfterDate(Date date)
 	{
 		Preconditions.checkNotNull(date);
 		List<Ticket> tickets  =  ticketDao.findNumberOfTicketsCreatedAfterDate(date);
-		List<TicketDTO> ticketDTOs = convertTicketListToTicketDTOList(tickets);
+		List<ListTicketDTO> ticketDTOs = convertTicketListToTicketDTOList(tickets);
 		return ticketDTOs;
 	}
 
