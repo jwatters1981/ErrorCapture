@@ -18,6 +18,8 @@ var CreateTicketController = function($scope, $http, $location) {
     	 $http.get('tickets/blankTicket').success(function(){
  
     		 $scope.fetchBlankTicket();
+         }).error(function(){
+        	 alert("error");
          });
     };
 
@@ -25,6 +27,8 @@ var CreateTicketController = function($scope, $http, $location) {
     	
         $http.post('tickets/addTicket',$scope.ticket).success(function(){
         	
+        }).error(function(err){
+       	 alert("Error "+err.message);
         });
         $location.path('/tickets/'+$scope.ticket.applicationsHolder.id+'/0/10');
         

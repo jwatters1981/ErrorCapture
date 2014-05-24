@@ -62,6 +62,12 @@ public class TicketController
 	{
 		throw new RuntimeException("400 error in TicketController",e);
 	}
+	
+	@ExceptionHandler(value=Exception.class)
+	public void handleInternalServerError(Exception e)
+	{
+		throw new RuntimeException("500 error in TicketController",e);
+	}
 
 	@RequestMapping("/ticketlist.json/{applicationId}/{start}/{end}")
 	public @ResponseBody List<ListTicketDTO> getTicketList(@PathVariable String applicationId, @PathVariable Integer start, @PathVariable Integer end)

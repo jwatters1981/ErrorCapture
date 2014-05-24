@@ -111,6 +111,8 @@ public class TicketService
 	@Transactional
 	public void convertAndSaveTicketDTO(TicketDTO ticketDTO, String username)
 	{
+		Preconditions.checkNotNull(ticketDTO,"Ticket is null, cannot save a null ticket");
+		Preconditions.checkNotNull(ticketDTO.getApplicationsHolder(), "The ticket needs to have an application");
 		Application application = applicationDao.findApplicationById(ticketDTO.getApplicationsHolder().getId());
 		Ticket ticket = new Ticket(ticketDTO.getTicketDescription(), new Date(), Priority.P1, application);
 		TicketComment ticketComment = new TicketComment(ticket,ticketDTO.getTicketComment(),username,new Date());

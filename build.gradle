@@ -12,6 +12,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: "jacoco"
 apply plugin: 'pmd'
+apply plugin: 'war'
 jar {
 	baseName = 'gs-spring-boot'
 	version =  '0.1.0'
