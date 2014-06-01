@@ -52,6 +52,18 @@ public class UserRoleMapping implements Serializable
 	@JoinColumn(name = "ROLE_ID")
 	private Role role;
 
+	public UserRoleMapping()
+	{
+		super();
+	}
+
+	public UserRoleMapping(User user, Role role)
+	{
+		super();
+		this.user = user;
+		this.role = role;
+	}
+
 	public Long getId()
 	{
 		return id;

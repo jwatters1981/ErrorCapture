@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.watterssoft.appsupport.application.domain.Application;
 import org.watterssoft.appsupport.application.domain.ApplicationDTO;
 import org.watterssoft.appsupport.application.service.ApplicationService;
-import org.watterssoft.appsupport.ticket.service.TicketService;
 import org.watterssoft.appsupport.user.service.UserService;
 
 /**
@@ -40,14 +39,18 @@ import org.watterssoft.appsupport.user.service.UserService;
 public class ApplicationController
 {
 
-	@Autowired
 	private UserService userService;
 
-	@Autowired
 	private ApplicationService applicationService;
-	
+
+
 	@Autowired
-	private TicketService ticketService;
+	public ApplicationController(UserService userService, ApplicationService applicationService)
+	{
+		super();
+		this.userService = userService;
+		this.applicationService = applicationService;
+	}
 
 	@RequestMapping("/list")
 	public @ResponseBody List<ApplicationDTO> getUserApplications(HttpServletRequest request)
@@ -59,7 +62,8 @@ public class ApplicationController
 	public @ResponseBody void addApplication(@RequestBody ApplicationDTO applicationDTO, HttpServletRequest request)
 	{
 		Application application = new Application(applicationDTO.getName(), applicationDTO.getVersion(), applicationDTO.getUrl());
-		applicationService.save(application, userService.getUserByUserName(request.getRemoteUser()));
+		application = applicationService.save(application, userService.getUserByUserName(request.getRemoteUser()));
+		applicationDTO.setId(application.getId());
 	}
 
 	@RequestMapping(value = "/newApp", method = RequestMethod.GET)
@@ -80,9 +84,5 @@ public class ApplicationController
 		return "application/layout";
 	}
 
-	public void setUserService(UserService userService)
-	{
-		this.userService = userService;
-	}
 
 }

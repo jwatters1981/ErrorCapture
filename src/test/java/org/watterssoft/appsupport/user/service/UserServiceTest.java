@@ -73,8 +73,16 @@ public class UserServiceTest {
 		UserApplication userApplication = new UserApplication(user , application );
 		userApplicationDao.save(userApplication);
 		Assert.assertFalse(applicationService.getAllUserApplications("user").isEmpty());
-		
-		
+	}
+	
+	@Test
+	@Transactional
+	public void testFindUserById()
+	{
+		User user = new User("jwatters","password");
+		UserService service = new UserService(userDao);
+		user = userDao.save(user);
+		Assert.assertNotNull(service.getUserByUserName(user.getUsername()));
 	}
 
 }

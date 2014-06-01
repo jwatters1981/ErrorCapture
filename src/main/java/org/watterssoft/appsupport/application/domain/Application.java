@@ -27,7 +27,8 @@ import javax.persistence.Id;
  * @author johnwatters Apr 25, 2014 9:25:14 PM
  */
 @Entity
-public class Application implements Serializable {
+public class Application implements Serializable
+{
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,47 +45,100 @@ public class Application implements Serializable {
 	@Column(name = "APP_URL", nullable = false)
 	private String url;
 
-	public Application() {
+	public Application()
+	{
 
 	}
 
-	public Application(String name, String version, String url) {
+	public Application(String name, String version, String url)
+	{
 		super();
 		this.name = name;
 		this.version = version;
 		this.url = url;
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getVersion() {
+	public String getVersion()
+	{
 		return version;
 	}
 
-	public void setVersion(String version) {
+	public void setVersion(String version)
+	{
 		this.version = version;
 	}
 
-	public String getUrl() {
+	public String getUrl()
+	{
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(String url)
+	{
 		this.url = url;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Application other = (Application) obj;
+		if (id == null)
+		{
+			if (other.id != null)
+				return false;
+		}
+		else if (!id.equals(other.id))
+			return false;
+		if (url == null)
+		{
+			if (other.url != null)
+				return false;
+		}
+		else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Application [id=" + id + ", name=" + name + ", version=" + version + ", url=" + url + "]";
 	}
 
 }

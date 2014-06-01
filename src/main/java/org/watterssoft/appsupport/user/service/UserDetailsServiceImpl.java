@@ -37,11 +37,16 @@ import org.watterssoft.appsupport.user.domain.UserRoleMapping;
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService
 {
 
-	@Autowired
 	public UserService userService;
-	
-	@Autowired
+
 	private IUserRoleMappingDao userRoleMappngDao;
+
+	@Autowired
+	public UserDetailsServiceImpl(UserService userService, IUserRoleMappingDao roleMappingDao)
+	{
+		this.userRoleMappngDao = roleMappingDao;
+		this.userService = userService;
+	}
 
 	/*
 	 * (non-Javadoc)

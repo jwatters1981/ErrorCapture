@@ -19,6 +19,8 @@ package org.watterssoft.appsupport.application.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.google.common.base.Preconditions;
+
 /**
  * @author johnwatters 7 May 2014 08:45:03
  */
@@ -44,7 +46,9 @@ public class ApplicationDTO implements Serializable
 	{
 		this.name = application.getName();
 		this.version = application.getVersion();
+		Preconditions.checkNotNull(application.getId(), "Application Id cannot be null");
 		this.id = application.getId();
+		this.url = application.getUrl();
 	}
 	
 	public ApplicationDTO(Application application, int numberOfOpenTickets, int numberOfClosedTickets, Date lastDateTicketCreated)
